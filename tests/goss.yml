@@ -1,0 +1,6 @@
+---
+package:
+  elementary-desktop:
+    installed: true
+  jq:
+    installed: true

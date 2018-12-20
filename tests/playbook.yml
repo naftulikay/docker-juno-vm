@@ -1,0 +1,25 @@
+---
+- name: await start
+  hosts: all
+  become: true
+  tasks:
+    - name: wait for vm boot
+      command: wait-for-boot
+      changed_when: false
+
+- name: demonstrate capabilities
+  hosts: all
+  become: true
+  tasks:
+    - name: install a package
+      apt: name=jq state=present update_cache=yes
+
+- name: goss tests
+  hosts: all
+  become: true
+  roles:
+    - role: degoss
+      goss_file: goss.yml
+      goss_variables:
+        host_selinux: "{{ host_selinux | default(false) | bool }}"
+        docker_privileged: "{{ docker_privileged }}"

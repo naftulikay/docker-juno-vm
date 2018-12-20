@@ -1,0 +1,8 @@
+---
+- name: build
+  hosts: all
+  become: true
+  roles:
+    - role: vagrant-docker
+    - role: vagrant-python-dev
+      python_version: 3.6.7
