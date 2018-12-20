@@ -1,0 +1,12 @@
+.ansible
+.vagrant
+
+.travis.yml
+
+ansible.cfg
+LICENSE-APACHE
+LICENSE-MIT
+README.md
+requirements.yml
+vagrant.yml
+Vagrantfile

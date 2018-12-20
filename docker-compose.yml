@@ -1,0 +1,12 @@
+---
+version: '3'
+services:
+  juno:
+    build: ./
+    container_name: juno
+    image: naftulikay/juno-vm:latest
+    # systemd will not boot without privilges
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    stop_grace_period: 1s
