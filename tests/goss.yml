@@ -1,4 +1,11 @@
 ---
+command:
+  # make sure there are no files owned by root in the homedir
+  'sudo find /home/container -user root':
+    exit-status: 0
+    stdout:
+      - "!/.*/"
+
 package:
   elementary-desktop:
     installed: true

@@ -2,7 +2,7 @@ FROM naftulikay/bionic-vm:latest
 MAINTAINER Naftuli Kay <me@naftuli.wtf>
 
 # install keys (elementary builds and launchpad elementary PPA)
-RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys \
+RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv-keys \
   6CA297B211EEBF8E03ADA1AFA74F73EFFE70B91C \
   6C8769CEDC20F5E66C3B7D37BF36996C4E1F8A59
 
@@ -23,5 +23,8 @@ RUN sudo apt-get update >/dev/null \
   && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y elementary-desktop \
   && sudo rm -rf /var/lib/apt/lists/* \
   && sudo apt-get clean
+
+# fix home directory permissions; ~/.cache is being created somewhere in this Dockerfile as root likely due to sudo
+RUN sudo chown -R container:container /home/container
 
 ENTRYPOINT ["/usr/sbin/escalator", "/lib/systemd/systemd", "--", "--system", "--unit=multi-user.target"]
